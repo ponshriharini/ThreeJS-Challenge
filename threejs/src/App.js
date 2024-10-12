@@ -23,7 +23,7 @@ function App() {
   return (
     <Canvas
       shadows
-      camera={{ position: [1000, 200, -80], fov: 75, aspect: window.innerWidth / window.innerHeight }}
+      camera={{ position: [1500, 300, -80], fov: 90, aspect: window.innerWidth / window.innerHeight }}
       onCreated={({ gl, scene }) => {
         gl.setPixelRatio(window.devicePixelRatio);
         gl.setSize(window.innerWidth, window.innerHeight);
@@ -45,8 +45,8 @@ function App() {
       <pointLight position={[0, 10, -2]} intensity={400} color={"red"} castShadow /> 
 
       {/* Exterior Lights */}
-      <pointLight position={[0, 10, 10]} intensity={800} color={"purple"} castShadow /> 
-      <pointLight position={[0, 10, -10]} intensity={800} color={"purple"} castShadow /> 
+      <pointLight position={[0, 10, 10]} intensity={1000} color={"purple"} castShadow /> 
+      <pointLight position={[0, 10, -10]} intensity={1000} color={"purple"} castShadow /> 
 
       {/* Welcome sign light */}
       <pointLight position={[20, 5, -1]} intensity={180} color={"blue"} castShadow /> 
@@ -63,7 +63,7 @@ function App() {
       {/* Orbit Controls with camera movement limit */}
       <OrbitControls
         minDistance={5}
-        maxDistance={20} // Increase maxDistance to allow zooming out further
+        maxDistance={21} // Increase maxDistance to allow zooming out further
         maxPolarAngle={Math.PI / 2.1} // Prevents camera from going below the plane
       />
     </Canvas>
