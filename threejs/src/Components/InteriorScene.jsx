@@ -12,17 +12,19 @@ function InteriorScene({ cameraRef, listenerRef, handleDoorNear }) {
       onCreated={({ camera, gl, scene }) => {
         gl.setPixelRatio(window.devicePixelRatio);
         gl.setSize(window.innerWidth, window.innerHeight);
-        gl.setClearColor("#9B9B9B"); // Set canvas background to white
-        scene.background = new THREE.Color("#9B9B9B"); // Set interior background to white
+        gl.setClearColor("#9B9B9B"); 
+        scene.background = new THREE.Color("#9B9B9B"); 
 
-        cameraRef.current = camera; // Store the camera reference
-        camera.add(listenerRef.current); // Attach audio listener to the camera
+        // Store the camera reference
+        cameraRef.current = camera; 
+        // Attach audio listener to the camera
+        camera.add(listenerRef.current); 
       }}
     >
       {/* Ambient Light */}
       <ambientLight intensity={1} />
-
-      {/* Sign Light */}
+  
+      {/* Point Light */}
       <pointLight position={[0, 10, -2]} intensity={400} color={"white"} castShadow />
 
       {/* Spotlight for Focus */}

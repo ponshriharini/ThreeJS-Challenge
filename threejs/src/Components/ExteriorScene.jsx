@@ -13,11 +13,11 @@ function ExteriorScene({ cameraRef, listenerRef, handleDoorNear }) {
       onCreated={({ camera, gl, scene }) => {
         gl.setPixelRatio(window.devicePixelRatio);
         gl.setSize(window.innerWidth, window.innerHeight);
-        gl.setClearColor("#0d0d0d"); // Set canvas background to dark
-        scene.background = new THREE.Color("#3E0D40"); // Set exterior background
+        gl.setClearColor("#0d0d0d"); 
+        scene.background = new THREE.Color("#3E0D40"); 
 
-        cameraRef.current = camera; // Store the camera reference
-        camera.add(listenerRef.current); // Attach audio listener to the camera
+        cameraRef.current = camera;
+        camera.add(listenerRef.current); 
       }}
     >
       {/* Ambient Light */}

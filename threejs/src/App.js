@@ -6,15 +6,16 @@ import LoadingImage from "./Components/LoadingImage.jsx";
 import { useGLTF } from "@react-three/drei";
 
 function App() {
-  const [inside, setInside] = useState(false); // Track whether we're inside or outside
-  const [userInteracted, setUserInteracted] = useState(false); // Track if user has interacted
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [inside, setInside] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false); 
+  const [loading, setLoading] = useState(false); 
 
-  const cameraRef = useRef(); // Camera reference to attach audio listener
+  // Camera reference to attach audio listener
+  const cameraRef = useRef(); 
   const listenerRef = useRef(new THREE.AudioListener());
 
-  const exteriorSoundRef = useRef(null); // Ref for exterior sound
-  const interiorSoundRef = useRef(null); // Ref for interior sound
+  const exteriorSoundRef = useRef(null); 
+  const interiorSoundRef = useRef(null); 
 
   useGLTF.preload("/Models/PresidioMartInterior.glb");
 
@@ -29,7 +30,7 @@ function App() {
   // Handle user interaction to start playing sound
   useEffect(() => {
     const handleUserInteraction = () => {
-      setUserInteracted(true); // Mark user as interacted
+      setUserInteracted(true);
       window.removeEventListener('click', handleUserInteraction);
       window.removeEventListener('keydown', handleUserInteraction);
     };
@@ -51,7 +52,7 @@ function App() {
       if (inside) {
         // Handle entering interior
         if (exteriorSoundRef.current && exteriorSoundRef.current.isPlaying) {
-          exteriorSoundRef.current.stop(); // Stop exterior sound
+          exteriorSoundRef.current.stop(); 
         }
 
         // Load interior sound
@@ -71,7 +72,7 @@ function App() {
       } else {
         // Handle entering exterior
         if (interiorSoundRef.current && interiorSoundRef.current.isPlaying) {
-          interiorSoundRef.current.stop(); // Stop interior sound
+          interiorSoundRef.current.stop(); 
         }
 
         // Load exterior sound
@@ -82,10 +83,10 @@ function App() {
             exteriorSound.setLoop(true);
             exteriorSound.setVolume(0.5);
             exteriorSound.play();
-            exteriorSoundRef.current = exteriorSound; // Save reference
+            exteriorSoundRef.current = exteriorSound; 
           });
         } else if (!exteriorSoundRef.current.isPlaying) {
-          exteriorSoundRef.current.play(); // Play again if stopped
+          exteriorSoundRef.current.play();
         }
       }
     }
@@ -93,7 +94,7 @@ function App() {
 
   // Function to toggle between inside and outside with loading
   const handleDoorNear = () => {
-    setLoading(true); // Show loading screen
+    setLoading(true); 
     setTimeout(() => {
       setInside((prevState) => !prevState); // Toggle the inside state after delay
       setLoading(false); 

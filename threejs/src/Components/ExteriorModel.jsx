@@ -7,7 +7,6 @@ function ExteriorModel({ onDoorNear }) {
     const [gltf, setGltf] = useState(null);
     const doorRef = useRef();
   
-    // Load the GLB model using GLTFLoader
     useEffect(() => {
       const loader = new GLTFLoader();
       loader.load("/Models/PresidioMartExterior.glb", (gltfData) => {

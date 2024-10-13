@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useGLTF } from "@react-three/drei"; // Use useGLTF from drei
+import { useGLTF } from "@react-three/drei"; 
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import useKeyboardControls from "./hooks/useKeyboardControls";
@@ -8,48 +8,47 @@ function InteriorModel({ onDoorNear }) {
   const { camera } = useThree();
   const keys = useKeyboardControls();
   const doorRef = useRef();
-  const gltf = useGLTF("/Models/PresidioMartInterior.glb"); // Load the GLTF model using useGLTF
+  const gltf = useGLTF("/Models/PresidioMartInterior.glb"); 
 
-  // Define the boundaries for the interior (adjust these values according to your model)
-  const boundaryMin = new THREE.Vector3(-7, 1, -10); // Min boundary (walls/floor limits)
-  const boundaryMax = new THREE.Vector3(5, 5, 7);  // Max boundary (walls/ceiling limits)
+  // Define the boundaries for the interior 
+  const boundaryMin = new THREE.Vector3(-7, 1, -10);  // Min boundary (walls/floor limits)
+  const boundaryMax = new THREE.Vector3(5, 5, 7);     // Max boundary (walls/ceiling limits)
 
   useEffect(() => {
-      // Assuming the door in the interior model is named "DoorInterior"
       const door = gltf.scene.getObjectByName("Door");
       if (door) {
         doorRef.current = door;
 
         // Set the camera at a specific position when the interior model is loaded
-        camera.position.set(100, 800, -300); // Example position (x, y, z) - Adjust as needed
+        camera.position.set(100, 800, -300); 
       }
     }, [camera]);
 
   // Movement and proximity checks
   useFrame(() => {
-    const direction = new THREE.Vector3(); // Forward direction to move the camera
-    const rightVector = new THREE.Vector3(); // Right vector for strafing
+    const direction = new THREE.Vector3(); 
+    const rightVector = new THREE.Vector3(); 
 
     // Get camera's forward and right vectors
     camera.getWorldDirection(direction); 
-    rightVector.crossVectors(camera.up, direction); // Create the right vector for strafing
+    rightVector.crossVectors(camera.up, direction); 
 
     // Apply camera movement based on key input with a fixed step
     const stepDistance = 0.05;
     if (keys.current.forward) {
-      camera.position.addScaledVector(direction, stepDistance); // Move forward
+      camera.position.addScaledVector(direction, stepDistance);
     }
     if (keys.current.backward) {
-      camera.position.addScaledVector(direction, -stepDistance); // Move backward
+      camera.position.addScaledVector(direction, -stepDistance); 
     }
     if (keys.current.left) {
-      camera.position.addScaledVector(rightVector, -stepDistance); // Strafe left
+      camera.position.addScaledVector(rightVector, -stepDistance); 
     }
     if (keys.current.right) {
-      camera.position.addScaledVector(rightVector, stepDistance); // Strafe right
+      camera.position.addScaledVector(rightVector, stepDistance); 
     }
     if (keys.current.up) {
-      camera.position.y += stepDistance; // Move up
+      camera.position.y += stepDistance; 
     }
 
     // Ensure camera remains within boundaries
